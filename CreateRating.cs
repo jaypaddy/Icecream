@@ -17,7 +17,7 @@ namespace icecream.CreateRating
     {
         [FunctionName("CreateRating")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "api/v1/createrating")] HttpRequest req,
             [CosmosDB(
                 databaseName: "icecreamdb",
                 collectionName: "jaycontainer",
