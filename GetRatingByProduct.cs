@@ -19,7 +19,7 @@ namespace icecream.GetRating
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "v1/getratingbyproduct/{productid}")] HttpRequest req,
             [CosmosDB(
                 databaseName: "icecreamdb",
-                collectionName: "jaycontainer",
+                collectionName: "icecreamdb",
                 ConnectionStringSetting = "icecreamhack_DOCUMENTDB",
                 SqlQuery = "SELECT * FROM c where c.productId={productid}")]
                 IEnumerable<Rating> ratings,

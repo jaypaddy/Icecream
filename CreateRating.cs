@@ -57,7 +57,7 @@ namespace icecream.CreateRating
                     return new BadRequestObjectResult($"ProductId: {ratingDoc.productId} not found");
                 }
 
-                Uri collectionUri = UriFactory.CreateDocumentCollectionUri("icecreamdb", "jaycontainer");
+                Uri collectionUri = UriFactory.CreateDocumentCollectionUri("icecreamdb", "icecreamdb");
                 /*IDocumentQuery<Rating> query = client.CreateDocumentQuery<Rating>(collectionUri)
                     .Where(rDoc => rDoc.userId==ratingDoc.userId && rDoc.productId.Contains(ratingDoc.productId) )
                     .AsDocumentQuery();

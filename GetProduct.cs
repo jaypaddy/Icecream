@@ -18,7 +18,7 @@ namespace icecream.GetProduct
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "v1/getproduct/{productid}")] HttpRequest req,
             [CosmosDB(
                 databaseName: "icecreamdb",
-                collectionName: "jaycontainer",
+                collectionName: "icecreamdb",
                 ConnectionStringSetting = "icecreamhack_DOCUMENTDB",
                 SqlQuery = "SELECT * FROM c where c.productId={productid}")]
                 IEnumerable<Product> products,
