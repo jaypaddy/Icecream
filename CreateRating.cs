@@ -54,7 +54,7 @@ namespace icecream.CreateRating
                 if (p == null)
                 {
                     //User Not Found
-                    return new BadRequestObjectResult($"ProductId: {ratingDoc.producId} not found");
+                    return new BadRequestObjectResult($"ProductId: {ratingDoc.productId} not found");
                 }
 
                 Uri collectionUri = UriFactory.CreateDocumentCollectionUri("icecreamdb", "jaycontainer");
@@ -72,11 +72,13 @@ namespace icecream.CreateRating
                     }
                     ResourceResponse<Document> response = await client.UpsertDocumentAsync(collectionUri,ratingDoc);
                 }*/
+                ratingDoc.timestamp = DateTime.Now;
                 ResourceResponse<Document> response = await client.CreateDocumentAsync(collectionUri,ratingDoc);
+                
+                return (ActionResult)new OkObjectResult($"{JsonConvert.SerializeObject(response.Resource)}");
 
             }
-            return (ActionResult)new OkObjectResult($"{JsonConvert.SerializeObject(ratingDoc)}");
-
+            return new BadRequestObjectResult($"Invalid Request");
         }
 
         static async Task<Product> GetProductAsync(string productid)
