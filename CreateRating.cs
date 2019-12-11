@@ -29,6 +29,7 @@ namespace icecream.CreateRating
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             //dynamic data = JsonConvert.DeserializeObject(requestBody);
             Rating ratingDoc = JsonConvert.DeserializeObject<Rating>(requestBody as string);
+            ratingDoc.timestamp = DateTime.Now;
 
             await ratingsDoc.AddAsync(ratingDoc);
             return (ActionResult)new OkObjectResult($"Document Stored:, {ratingDoc.ToString()}");
@@ -52,5 +53,7 @@ namespace icecream.CreateRating
         public string locationName { get; set; }
         public int rating { get; set; }
         public string userNotes { get; set; }
+
+        public DateTime timestamp {get; set;}
     }
 }
