@@ -46,7 +46,7 @@ namespace icecream.CreateRating
                 if (u == null)
                 {
                     //User Not Found
-                    return new BadRequestObjectResult("Userid: {ratingDoc.userId} not found");
+                    return new BadRequestObjectResult($"Userid: {ratingDoc.userId} not found");
                 }
 
                 //Check if the ProductId exists
@@ -54,7 +54,7 @@ namespace icecream.CreateRating
                 if (p == null)
                 {
                     //User Not Found
-                    return new BadRequestObjectResult("ProductId: {ratingDoc.producId} not found");
+                    return new BadRequestObjectResult($"ProductId: {ratingDoc.producId} not found");
                 }
 
                 Uri collectionUri = UriFactory.CreateDocumentCollectionUri("icecreamdb", "jaycontainer");
