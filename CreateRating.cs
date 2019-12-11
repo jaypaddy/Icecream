@@ -32,7 +32,7 @@ namespace icecream.CreateRating
             ratingDoc.timestamp = DateTime.Now;
 
             await ratingsDoc.AddAsync(ratingDoc);
-            return (ActionResult)new OkObjectResult($"Document Stored:, {ratingDoc.ToString()}");
+            return (ActionResult)new OkObjectResult($"{JsonConvert.SerializeObject(ratingDoc)}");
 
         }
     }
