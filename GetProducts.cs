@@ -7,36 +7,40 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Microsoft.Azure.Documents;
 using System.Collections.Generic;
 
-namespace icecream.GetRating
+namespace icecream.GetProducts
 {
-    public static class GetRatingByProduct
+    public static class GetProducts
     {
-        [FunctionName("GetRatingByProduct")]
+        [FunctionName("GetProducts")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "v1/getratingbyproduct/{productid}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "v1/getproduct/{productid}")] HttpRequest req,
             [CosmosDB(
                 databaseName: "icecreamdb",
                 collectionName: "jaycontainer",
                 ConnectionStringSetting = "icecreamhack_DOCUMENTDB",
                 SqlQuery = "SELECT * FROM c where c.productId={productid}")]
-                IEnumerable<Rating> ratings,
+                IEnumerable<Product> products,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            var retJSON="";
-            retJSON = JsonConvert.SerializeObject(ratings);
-            return (ActionResult)new OkObjectResult($"{retJSON}");
-
+            var retJSON = JsonConvert.SerializeObject(products); 
+            if (retJSON.Length > 0 )
+            {
+                return  (ActionResult) new OkObjectResult($"{retJSON}");
+            }
+            else
+            {
+                return (ActionResult) new StatusCodeResult(404);
+            }
         }
     }
 
-    public class Rating
+    public class Product
     {
-        public string userId { get; set; }
+        public string id {get; set;}
         public string productId { get; set; }
         public string locationName { get; set; }
         public int rating { get; set; }
