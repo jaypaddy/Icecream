@@ -74,8 +74,8 @@ namespace icecream.CreateRating
                 }*/
                 ratingDoc.timestamp = DateTime.Now;
                 ResourceResponse<Document> response = await client.CreateDocumentAsync(collectionUri,ratingDoc);
-                
-                return (ActionResult)new OkObjectResult($"{JsonConvert.SerializeObject(response.Resource)}");
+                ratingDoc = (dynamic)response.Resource;
+                return (ActionResult)new OkObjectResult($"{JsonConvert.SerializeObject(ratingDoc)}");
 
             }
             return new BadRequestObjectResult($"Invalid Request");
