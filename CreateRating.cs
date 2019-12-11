@@ -31,7 +31,7 @@ namespace icecream.CreateRating
             Rating ratingDoc = JsonConvert.DeserializeObject<Rating>(requestBody as string);
 
             await ratingsDoc.AddAsync(ratingDoc);
-            return (ActionResult)new OkObjectResult($"Document Stored:, {ratingDoc.productId}");
+            return (ActionResult)new OkObjectResult($"Document Stored:, {ratingDoc.ToString()}");
 
         }
     }
