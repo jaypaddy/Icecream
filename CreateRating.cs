@@ -25,7 +25,7 @@ namespace icecream.CreateRating
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "v1/createrating")] HttpRequest req,
             [CosmosDB(
                 databaseName: "icecreamdb",
-                collectionName: "jaycontainer",
+                collectionName: "icecreamdb",
                 ConnectionStringSetting = "icecreamhack_DOCUMENTDB")] DocumentClient client,
             ILogger log)
         {
